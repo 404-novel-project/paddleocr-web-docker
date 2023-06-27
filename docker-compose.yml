@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+  paddleocr-web:
+    container_name: paddleocr-web
+    restart: unless-stopped
+    image: paddleocr-web
+    build: paddleocr-web
+    volumes:
+      - paddleocr:/root/.paddleocr
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+
+  paddleocr-nginx:
+    container_name: paddleocr-nginx
+    restart: unless-stopped
+    image: paddleocr-nginx
+    build: paddleocr-nginx
+    ports:
+      - 8080:8080
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+
+volumes:
+  paddleocr:
